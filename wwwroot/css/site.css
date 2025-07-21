@@ -1,0 +1,88 @@
+﻿html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+
+/* Styl dla szerokich pól wejściowych */
+.wide-input {
+    width: 100%; /* Ustawienie szerokości na 100% kontenera */
+}
+
+/* Styl dla tabel */
+table {
+    width: 100%; /* Ustawienie szerokości tabeli na 100% strony */
+}
+
+/* Styl dla komórek tabeli */
+td {
+    padding: 10px;
+}
+
+
+/* Sekcja górna - stylizacja */
+/* Ustawia sekcję jako element względny o pełnej szerokości i wysokości widoku przeglądarki.
+      Dodaje obraz tła, który jest wyśrodkowany i dopasowany do całej sekcji.
+      Tekst w sekcji jest biały, a nadmiar zawartości ukryty. */
+.top-section {
+    position: relative;
+    width: 100%; /* Pełna szerokość */
+    height: 100vh; /* Pełna wysokość widoku */
+    background: url('/images/razorpagesgaleria.png') no-repeat center center; /* Obraz tła */
+    background-size: cover; /* Dopasowanie obrazu do sekcji */
+    color: white;
+    overflow: hidden;
+}
+
+/* Nakładka na treść */
+/* Ustawia nakładkę na treść jako element względny z wyższym z-index, aby była nad obrazem tła.
+      Dodaje cień do tekstu, aby poprawić jego czytelność. */
+.content-overlay {
+    position: relative;
+    z-index: 2; /* Treść nad obrazem tła */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8); /* Cień tekstu */
+}
+
+/* Stylizacja kart dla obrazów */
+/* Usuwa obramowanie kart, dodaje cień i efekt powiększenia przy najechaniu kursorem. */
+.card {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+    /* Powiększenie karty przy najechaniu kursorem */
+    .card:hover {
+        transform: scale(1.05);
+    }
+
+/* Stylizacja obrazu w kartach */
+/* Ogranicza maksymalną wysokość obrazu i dopasowuje go do kontenera. */
+.card-img-top {
+    max-height: 200px;
+    object-fit: cover;
+}
+
+/* Odstępy sekcji */
+/* Dodaje odstęp od góry dla sekcji z obrazami. */
+#paintings-section {
+    padding-top: 50px;
+}

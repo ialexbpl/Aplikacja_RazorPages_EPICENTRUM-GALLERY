@@ -1,0 +1,98 @@
+﻿@page  
+@model Aplikacja_RazorPages.Pages.CreateModel  
+@{  
+  // Ustawienie tytułu strony w ViewData
+  ViewData["Title"] = "Create Painting";  
+}  
+
+<h1>Create Painting</h1>  
+
+<form method="post" enctype="multipart/form-data">  
+  <!-- Pole formularza dla nazwy obrazu -->
+  <div class="form-group">  
+      <label asp-for="Painting.Name"></label> <!-- Etykieta dla pola nazwy -->
+      <input asp-for="Painting.Name" class="form-control" /> <!-- Pole tekstowe dla nazwy obrazu -->
+      <span asp-validation-for="Painting.Name" class="text-danger"></span> <!-- Walidacja dla pola nazwy -->
+  </div>  
+
+  <!-- Pole formularza dla autora obrazu -->
+  <div class="form-group">  
+      <label asp-for="Painting.Author"></label> <!-- Etykieta dla pola autora -->
+      <input asp-for="Painting.Author" class="form-control" /> <!-- Pole tekstowe dla autora obrazu -->
+      <span asp-validation-for="Painting.Author" class="text-danger"></span> <!-- Walidacja dla pola autora -->
+  </div>  
+
+  <!-- Pole formularza dla opisu obrazu -->
+  <div class="form-group">  
+      <label asp-for="Painting.Description"></label> <!-- Etykieta dla pola opisu -->
+      <textarea asp-for="Painting.Description" class="form-control"></textarea> <!-- Pole tekstowe dla opisu obrazu -->
+      <span asp-validation-for="Painting.Description" class="text-danger"></span> <!-- Walidacja dla pola opisu -->
+  </div>  
+
+  <!-- Pole formularza dla ceny obrazu -->
+  <div class="form-group">  
+      <label asp-for="Painting.Price"></label> <!-- Etykieta dla pola ceny -->
+      <input asp-for="Painting.Price" class="form-control" /> <!-- Pole tekstowe dla ceny obrazu -->
+      <span asp-validation-for="Painting.Price" class="text-danger"></span> <!-- Walidacja dla pola ceny -->
+  </div>  
+
+  <!-- Pole formularza dla przesyłania pliku obrazu -->
+  <div class="form-group">  
+      <label for="PhotoFile">Image</label> <!-- Etykieta dla pola przesyłania pliku -->
+      <input type="file" id="PhotoFile" name="PhotoFile" class="form-control" /> <!-- Pole do przesyłania pliku obrazu -->
+  </div>
+
+  <!-- Przycisk do zapisania formularza -->
+  <div class="form-group mt-4">
+      <button type="submit" class="btn btn-primary">Save</button> <!-- Przycisk zapisu -->
+  </div>
+</form>
+
+@section Scripts {  
+  <!-- Włączenie skryptów walidacyjnych -->
+  <partial name="_ValidationScriptsPartial" />  
+}  
+
+
+<script>
+
+
+    function loadPainting(id) {
+        if (id) {
+            const url = `?handler=LoadPainting&id=${id}`;
+            window.location.href = url;
+        }
+    }
+         // Funkcja do podglądu obrazu przed przesłaniem
+      function previewImage(event) 
+      {
+        const input = event.target;
+        const preview = document.getElementById('imagePreview');
+
+        if (input.files && input.files[0]) 
+        {
+            const reader = new FileReader();
+
+            reader.onload = function (e) 
+            {
+                preview.src = e.target.result; // Ustawia podgląd obrazu na załadowany plik
+                preview.style.display = 'block';
+            };
+
+            reader.readAsDataURL(input.files[0]); // Odczytuje plik obrazu jako URL
+        } else 
+        {
+            preview.src = '#';
+            preview.style.display = 'none';
+        }
+    }
+</script>
+
+  
+
+
+<!-- Dodanie elementu img do podglądu obrazu -->
+  <div class="form-group mt-3">
+     <img id="imagePreview" src="" alt="Image Preview" style="display: none; max-width: 100%; height: auto;" />
+  </div>
+

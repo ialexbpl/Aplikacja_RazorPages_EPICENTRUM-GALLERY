@@ -1,0 +1,35 @@
+﻿@page
+@model Aplikacja_RazorPages.Pages.cartModel
+@{
+}
+@foreach (var painting in Model.CartPaintings)
+{
+    <div>
+        <span>@painting.Name by @painting.Author</span>
+        <form method="post" asp-page-handler="AddToCart">
+            <input type="hidden" name="id" value="@painting.Id" />
+            <button type="submit" class="btn btn-success btn-sm">Add to cart</button>
+        </form>
+    </div>
+}
+
+<h4>Your Cart</h4>
+@if (Model.CartPaintings.Any())
+{
+    <ul>
+        @foreach (var painting in Model.CartPaintings)
+        {
+            <li>
+                @painting.Name by @painting.Author
+                <form method="post" asp-page-handler="RemoveFromCart" style="display:inline;">
+                    <input type="hidden" name="id" value="@painting.Id" />
+                    <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                </form>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>Your cart is empty.</p>
+}

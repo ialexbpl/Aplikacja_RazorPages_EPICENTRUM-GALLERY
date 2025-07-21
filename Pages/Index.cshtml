@@ -1,0 +1,47 @@
+﻿@page  
+@model Aplikacja_RazorPages.Pages.IndexModel  
+@{  
+  ViewData["Title"] = "Home page"; // Ustawia tytuł strony w ViewData  
+}  
+
+<!-- Sekcja górna z obrazem tła na pełną szerokość i wysokość -->  
+<div class="top-section d-flex flex-column justify-content-center align-items-center text-white">  
+  <!-- Nakładka na treść -->  
+  <div class="content-overlay text-center">  
+      <h1 class="display-4">Welcome to Epicentrum Art Gallery</h1> <!-- Nagłówek sekcji powitalnej -->  
+      <p class="lead">Discover and collect stunning artwork from talented artists around the world.</p> <!-- Opis galerii -->  
+      <a class="btn btn-primary btn-lg" href="#paintings-section">Explore the Gallery</a> <!-- Przycisk prowadzący do sekcji z obrazami -->  
+  </div>  
+</div>  
+
+<!-- Sekcja z siatką obrazów -->  
+<div id="paintings-section" class="container my-5">  
+  <h2 class="text-center mb-4">Gallery</h2> <!-- Nagłówek sekcji galerii -->  
+  <div class="row">  
+      @if (Model.Paintings != null && Model.Paintings.Any()) // Sprawdza, czy lista obrazów nie jest pusta  
+      {  
+          @foreach (var painting in Model.Paintings) // Iteruje przez listę obrazów  
+          {  
+              <div class="col-md-4 mb-4">   <!-- SZER I MARGIN BTM -->
+                    <div class="card h-100">
+                        <!--karta będzie się rozciągać na całą dostępną wysokość kolumny. -->
+                        <img src="data:image/png;base64,@Convert.ToBase64String(painting.Image)" class="card-img-top" alt="@painting.Name"> <!-- Zamienia tablicę bajtów (byte[]) na ciąg tekstowy w formacie Base64-->
+                      <div class="card-body">  
+                          <h5 class="card-title">@painting.Name</h5> <!-- Wyświetla nazwę obrazu -->  
+                          <p class="card-text">By @painting.Author</p> <!-- Wyświetla autora obrazu -->  
+                          <p class="card-text">@painting.Description</p> <!-- Wyświetla opis obrazu -->
+                            <p class="card-text"><strong>Price:</strong> @painting.Price.ToString("C")</p>
+                            <!-- cenę obrazu w formacie walutowym, np. 1000 FUNT 1,000.00 dla kultury en-UK-->
+                        </div>  
+                  </div>  
+              </div>  
+          }  
+      }  
+      else  
+      {  
+          <p class="text-center">No paintings available.</p> <!-- Wyświetla komunikat, jeśli brak obrazów -->  
+      }  
+  </div>  
+</div>
+
+
